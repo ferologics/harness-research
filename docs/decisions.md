@@ -17,6 +17,7 @@ Agreed decisions with their reasons. Read this before proposing anything. A prop
 | The baseline is Pi as shipped, current release (1.4.x). No old Pi versions. | The question is about Pi today. |
 | Each Prime Agent building block gets an objective Pi dual, built in this repo: same mechanism, same trigger, model-facing text ported from Prime Agent, Prime's defaults, nothing extra. Third-party Pi packages and the maintainer's personal Pi setup are never used as arms. | The comparison must be reviewable and independent of anyone's configuration. |
 | The main design is zero to hero: Pi as shipped, then one dual at a time, up to Prime Agent's set of building blocks. Prime Agent runs beside the ladder, with its own switches turned off at matching rungs. | Shows whether Pi with Prime's building blocks performs like Prime Agent, and which block moves results. |
+| The REPL enters the ladder once, as Prime Agent's only interface (L1). There is no optional-REPL rung. A tools-only arm (T4) carries the subagents, messaging, and memory duals without the REPL. | An optional REPL next to Pi's tools is not a Prime Agent building block. T4 answers "does the REPL matter?" in one 2×2 (interface × building blocks) instead of more REPL rungs. |
 | The memory dual ports Prime Agent's continual harness and refine (prompts verbatim). pi-mem, pi-reflect, and similar packages are not used. | Faithful to the claim being tested. |
 | Experiments are pre-registered; calibration uses only dev tasks. | Avoids tuning toward results. |
 

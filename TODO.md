@@ -17,12 +17,12 @@
 
 Each dual gets a spec (Prime source file and commit, deliberate differences) and a smoke test. See [docs/primitives.md](docs/primitives.md).
 
-- [ ] L1 Python REPL tool
-- [ ] L2 REPL as the only interface (`bash()` with completion notices, `edit()`)
-- [ ] L3 subagents
-- [ ] L4 agent messaging
-- [ ] L5 continual harness and refine (prompts ported verbatim)
-- [ ] L6 general guidance text
+- [ ] L1 Python REPL as the only interface (`bash()` with completion notices, `edit()`)
+- [ ] L2 subagents
+- [ ] L3 agent messaging
+- [ ] L4 continual harness and refine (prompts ported verbatim)
+- [ ] L5 general guidance text
+- [ ] T4 tool wrappers: L2–L4 as plain Pi tools, same backends, no REPL
 
 ## Run the ladder
 
@@ -31,7 +31,7 @@ Each dual gets a spec (Prime source file and commit, deliberate differences) and
 - [ ] A2 screening: L0 and P on 90 candidates; select the subset
 - [ ] Freeze [experiments/ladder/PLAN.md](experiments/ladder/PLAN.md)
 - [ ] A3 main runs
-- [ ] B: GLM-5.2 smoke for cost, then L0, L6, P on 25 tasks
+- [ ] B: GLM-5.2 smoke for cost, then L0, L5, P on 25 tasks
 
 ## Later
 

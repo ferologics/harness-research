@@ -4,7 +4,7 @@
 
 ## Question
 
-Does Prime Agent's continual harness (memory store plus refine) make later tasks in the same repository more often solved or cheaper? Does the Pi dual (rung L5) do the same?
+Does Prime Agent's continual harness (memory store plus refine) make later tasks in the same repository more often solved or cheaper? Does the Pi dual (rung L4) do the same?
 
 Single tasks cannot show this: refine carries lessons from one task to the next.
 
@@ -16,8 +16,8 @@ SWE-rebench-V2 repos with at least 10 tasks: 106 repos, 1,954 tasks ([scripts/sw
 
 | Arm | Harness | State between tasks |
 |---|---|---|
-| L5-carry | Pi + duals up to L5 | store carried through the sequence |
-| L5-reset | Pi + duals up to L5 | store wiped before each task |
+| L4-carry | Pi + duals up to L4 | store carried through the sequence |
+| L4-reset | Pi + duals up to L4 | store wiped before each task |
 | P-carry | Prime Agent | refinements carried (global scope) |
 | P-reset | Prime Agent | refinements wiped before each task |
 

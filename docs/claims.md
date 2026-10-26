@@ -11,13 +11,13 @@ Sources:
 | ID | Claim | Source | Testable as | Experiment |
 |---|---|---|---|---|
 | C1 | Prime Agent matches or beats native and popular harnesses on long-context and long-horizon tasks. | Paper abstract, Table 1 | Whole-harness gap, same model, with repeats and intervals | Ladder: L0 vs P |
-| C2 | "Performance scales more than a sum of its parts. And that also includes the model." | Tweet | Positive interaction between building blocks | Ladder: depth × refinement inside Prime Agent; L6 vs P |
-| C3 | "Our evals show we still know the secret sauce to do it best," compared with harnesses that adopted a subset of Prime Agent's features. | Tweet | Prime Agent beats Pi given the same building blocks | Ladder: L6 vs P |
+| C2 | "Performance scales more than a sum of its parts. And that also includes the model." | Tweet | Positive interaction between building blocks | Ladder: depth × refinement inside Prime Agent; interface × building blocks on Pi; L5 vs P |
+| C3 | "Our evals show we still know the secret sauce to do it best," compared with harnesses that adopted a subset of Prime Agent's features. | Tweet | Prime Agent beats Pi given the same building blocks | Ladder: L5 vs P |
 | C4 | The ARC-AGI-3 jump came mainly from REPL access plus a "use a world model" prompt; the continual harness matters more where information isn't in the weights. | Interview ~1:36 | Attribution | Not tested (ARC-AGI-3 is not a coding task) |
-| C5 | The REPL and refinement of disk state are "non-overlapping procedures." | Interview ~1:38–1:40 | Zero interaction (additivity). In tension with C2. | Not testable inside Prime Agent (the REPL can't be removed); later as a Pi 2×2 |
+| C5 | The REPL and refinement of disk state are "non-overlapping procedures." | Interview ~1:38–1:40 | Zero interaction (additivity). In tension with C2. | Partly: interface × building blocks on Pi (L0, L1, T4, L4); the REPL can't be removed inside Prime Agent |
 | C6 | Pi is "terrible compared to prime agent" on long-horizon tasks, even with an added subagent. | Interview ~1:46 | Same as the ladder's L0 vs P | Ladder: L0 vs P |
 | C7 | Prime Agent is no worse on short-horizon tasks and equal or better on long-horizon ones. | Interview ~1:44–1:46 | Gap by task size | Ladder: L0 vs P by stratum |
-| C8 | REPL use cuts input tokens substantially at similar performance (PMPP-Hard). | Interview ~1:54; paper §3.4 | Tokens per task at equal success | Ladder: L0 → L1 → L2 tokens |
+| C8 | REPL use cuts input tokens substantially at similar performance (PMPP-Hard). | Interview ~1:54; paper §3.4 | Tokens per task at equal success | Ladder: L0 vs L1 tokens |
 | C9 | Adoption of Prime Agent's features by other harnesses is "the genuine evidence." | Tweet | Not a performance claim; not tested | — |
 
 ## What the paper's evidence shows

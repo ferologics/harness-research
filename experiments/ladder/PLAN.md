@@ -8,6 +8,7 @@
 2. Which building block, added to Pi, changes success, cost, or turns?
 3. Does Pi with every dual match Prime Agent?
 4. Inside Prime Agent, do subagents and refinement add up, or more, or less ("more than a sum of its parts")?
+5. Does Prime Agent's everything-in-Python interface matter, on its own or together with the building blocks?
 
 ## Arms
 
@@ -16,15 +17,15 @@ Rungs and duals are defined in [docs/primitives.md](../../docs/primitives.md).
 | Arm | Harness | Building blocks |
 |---|---|---|
 | L0 | Pi 1.4.x as shipped | `read`, `write`, `edit`, `bash` |
-| L1 | Pi + dual | + Python REPL tool |
-| L2 | Pi + duals | REPL as the only interface |
-| L3 | Pi + duals | + subagents |
-| L4 | Pi + duals | + agent messaging |
-| L5 | Pi + duals | + continual harness and refine |
-| L6 | Pi + duals | + Prime's general guidance text |
+| L1 | Pi + dual | Python REPL as the only interface |
+| L2 | Pi + duals | + subagents |
+| L3 | Pi + duals | + agent messaging |
+| L4 | Pi + duals | + continual harness and refine |
+| L5 | Pi + duals | + Prime's general guidance text |
+| T4 | Pi + duals as tools | Pi's tools + subagents, messaging, continual harness and refine as tools; no REPL |
 | P | Prime Agent v0.10.0 | defaults (depth 2, refinements on, autonomous off) |
-| P-d0r0 | Prime Agent | `rlmMaxDepth: 0`, `harnessRefinements: false` (matches L2) |
-| P-d2r0 | Prime Agent | `rlmMaxDepth: 2`, `harnessRefinements: false` (matches L4) |
+| P-d0r0 | Prime Agent | `rlmMaxDepth: 0`, `harnessRefinements: false` (matches L1) |
+| P-d2r0 | Prime Agent | `rlmMaxDepth: 2`, `harnessRefinements: false` (matches L3) |
 | P-d0r1 | Prime Agent | `rlmMaxDepth: 0`, `harnessRefinements: true` (completes the 2×2) |
 
 All arms: same model and sampling, same container image per task, same task prompt, same token budget per task (counting subagents), no wall-clock limit.
@@ -54,7 +55,7 @@ Tasks that every arm solves, or no arm solves, carry no information about differ
 | A1 smoke | Qwen3.8-27B (local) | 3 tasks × 11 arms | Debug every arm; measure time per run |
 | A2 screening | Qwen3.8-27B | 180 | Select the subset |
 | A3 main | Qwen3.8-27B | ~50 tasks × 11 arms × 2 runs ≈ 1,100 | All questions |
-| B confirmation | GLM-5.2 (Prime Inference) | 3 smoke, then L0, L6, P × 25 tasks × 1 run = 75 | Check the local findings on the paper's model; stop at $120 spent |
+| B confirmation | GLM-5.2 (Prime Inference) | 3 smoke, then L0, L5, P × 25 tasks × 1 run = 75 | Check the local findings on the paper's model; stop at $120 spent |
 | C | | | Memory track: [experiments/memory-sequences](../memory-sequences/PLAN.md) |
 | D | Qwen3.8-27B | tbd | NL2RepoBench whole-repo builds |
 
@@ -71,9 +72,9 @@ A third run is added for a contrast only when its interval crosses the decision 
 ## Analysis
 
 - Per task, average over runs; compare arms paired by task; bootstrap intervals over tasks.
-- Contrasts: each rung against the one before it; L0 vs P (question 1, also by stratum); L6 vs P (question 3); L2 vs P-d0r0 and L4 vs P-d2r0 (do the duals match Prime at those points?); the depth × refinement interaction from P, P-d0r0, P-d2r0, P-d0r1 (question 4).
+- Contrasts: each rung against the one before it; L0 vs P (question 1, also by stratum); L5 vs P (question 3); L1 vs P-d0r0 and L3 vs P-d2r0 (do the duals match Prime at those points?); the depth × refinement interaction from P, P-d0r0, P-d2r0, P-d0r1 (question 4); the interface × building blocks interaction from L0, L1, T4, L4 (question 5).
 - Rough planning numbers: with about 50 informative tasks and 2 runs each, solve-rate differences of about 15–20 points between two arms, and cost differences of about 20%, should be detectable. Smaller differences will read as "no detectable difference."
-- The ladder order is fixed (Prime Agent's own layering: REPL first, everything else inside it). A rung's measured gain depends on the rungs below it; that is stated with every result.
+- The ladder order is fixed (Prime Agent's own layering: REPL first, everything else inside it). A rung's measured gain depends on the rungs below it; that is stated with every result. T4 shows how much of the L1–L4 result depends on the REPL.
 
 ## Deviations
 
