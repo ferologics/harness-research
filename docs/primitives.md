@@ -28,11 +28,28 @@ Each dual ships a spec with its Prime source (file and commit) and every deliber
 
 In Prime Agent the REPL is not a feature next to other tools: it is the only way the model acts, and subagents, messaging, and memory are Python functions inside it. Reaching Prime Agent's set of building blocks therefore means switching Pi's interface at some point. L1 measures that switch on its own (success, turns, tokens), so its effect is not credited to the subagents rung that follows.
 
-## Tools-only arm (T4)
+## Prime Agent's REPL and Pi's codemode
 
-T4 gives Pi the L2–L4 building blocks (subagents, messaging, continual harness and refine) as ordinary Pi tools, backed by the same implementation as the duals, with no REPL. Tool descriptions are adapted from Prime's text; the calling surface is the deliberate difference.
+Pi ships codemode, built in and off by default. It shares the REPL's core idea and lacks three of its properties:
 
-With L0, L1, and L4, T4 completes a 2×2 of interface (Pi tools or REPL) × building blocks (none or all three). It shows whether the REPL matters on its own, only together with the building blocks, or not at all.
+| | Pi codemode | Prime Agent REPL |
+|---|---|---|
+| Model writes code that calls tools; only printed output returns | yes | yes |
+| Can be the only way to act | yes (`codemode.mode: only`) | yes |
+| Other building blocks callable from code | yes (scripts call any registered tool) | yes (Python functions) |
+| State kept between calls | no, apart from a small JSON store | yes; variables survive turns and compactions |
+| Runtime | sandboxed JavaScript; files and network only through tools | Python with files, network, libraries |
+| Background work | calls are cancelled when the script ends | commands keep running between turns and send a notice when done |
+
+## Interface arms (Module B)
+
+Run only if the core shows the L0 → L1 step changing success or cost (see the ladder plan).
+
+- **C0:** Pi as shipped with `codemode.mode: only`. Nothing built.
+- **T4:** the L2–L4 building blocks (subagents, messaging, continual harness and refine) as ordinary Pi tools, backed by the same implementation as the duals, with no REPL. Tool descriptions are adapted from Prime's text; the calling surface is the deliberate difference.
+- **C4:** T4 with `codemode.mode: only`, so scripts call the building-block tools.
+
+With L0, L1, and L4 these form a 3×2: interface (plain tools, codemode, REPL) × building blocks (none, all three). It shows whether the REPL matters beyond codemode, on its own or only together with the building blocks.
 
 ## Held at each harness's own behaviour
 
@@ -52,7 +69,7 @@ Off by default or irrelevant in single-task evaluations: goal mode, autonomous m
 3. Use Prime Agent's defaults.
 4. Add nothing: no features, hints, or guardrails that Prime Agent lacks.
 
-## Matched reference points
+## Matched reference points (Module A)
 
 | Pi rung | Prime Agent with the same building blocks |
 |---|---|

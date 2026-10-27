@@ -10,7 +10,7 @@ The concrete case is Prime Agent against Pi. Prime Agent's paper reports it matc
 
 1. **Inventory** Prime Agent's building blocks from its source code ([docs/primitives.md](docs/primitives.md)).
 2. **Build an objective Pi dual** for each block in this repo: the same mechanism, the same trigger, model-facing text ported from Prime Agent, Prime's defaults, and nothing extra.
-3. **Zero to hero:** start from Pi as shipped and add one dual at a time until Pi has Prime Agent's set of building blocks. Run Prime Agent beside every rung, and run it with its own switches off at the rungs that match.
+3. **Zero to hero:** start from Pi as shipped and add one dual at a time until Pi has Prime Agent's set of building blocks. Run Prime Agent as shipped beside the ladder. Follow-up modules (Prime Agent's own switches; REPL vs Pi's codemode) run only when the core results call for them.
 4. **Coding tasks at several sizes**, sliced from public benchmarks on Prime Intellect's eval stack.
 5. **Two models:** breadth on stock Qwen3.8-27B served locally; confirmation on GLM-5.2, the paper's model.
 
