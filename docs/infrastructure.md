@@ -16,7 +16,7 @@ An adapter is verifiers' per-harness code: it installs the harness in the task c
 | `pi` | Pi `1.4.0` through `pi-acp 0.0.34`; MCP through Pi's built-in support | Upstream bumped in `32c1f14` (#2988). Runs in a fresh agent directory, so no personal settings load. Loads one extension of its own (the tool gate). |
 | `prime_agent` | `v0.10.1`, commit `8aac869` | Config: `autonomous` (default false), `dialect`, `env`. Passes `--no-session`, which may disable refinement (see [primitives.md](primitives.md#matched-reference-points)). |
 
-Our arms need two things the adapters don't offer: loading the dual extensions into Pi, and writing Prime Agent's `settings.json`. Both go into small harness subclasses in this repo, loaded through verifiers' plugin loader, so no upstream change is needed.
+Our arms need two things the adapters don't offer: loading the dual extensions into Pi, and writing Prime Agent's `settings.json`. The plugins in [harnesses/](../harnesses/) do both (`pi-ladder`, `prime-switches`); verifiers loads them as installed packages, so no upstream change is needed.
 
 `pi-acp 0.0.34` drives Pi 1.4.0 end to end: initialize, new session, a prompt with one bash tool call and its result, final answer (tested on macOS against a fake OpenAI-compatible server, outside verifiers).
 

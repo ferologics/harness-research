@@ -5,8 +5,8 @@
 - [x] Prime Agent switches read from source (results in [docs/primitives.md](docs/primitives.md#matched-reference-points-module-a))
 - [x] `pi-acp` 0.0.34 drives Pi 1.4.0 end to end; verifiers upstream already pins both (`32c1f14`)
 - [x] SWE-rebench-V2 2025 tasks map 1:1 to public `swerebenchv2/` Docker Hub tags (40 of 40 sampled exist)
-- [ ] L1 dual (REPL as the only interface), tested against a fake model server
-- [ ] Harness subclasses: Pi with the dual extensions per rung; Prime Agent with `settings.json` and `RLM_MAX_DEPTH`
+- [x] L1 dual (REPL as the only interface), tested against a fake model server ([duals/pi/l1-repl](duals/pi/l1-repl/SPEC.md))
+- [x] verifiers plugins `pi-ladder` and `prime-switches` ([harnesses/](harnesses/)); full runs wait for the GPU box
 
 ## Setup (needs the GPU box)
 
@@ -19,7 +19,7 @@
 
 Each dual gets a spec (Prime source file and commit, deliberate differences) and a smoke test. See [docs/primitives.md](docs/primitives.md).
 
-- [ ] L1 Python REPL as the only interface (`bash()` with completion notices, `edit()`)
+- [x] L1 Python REPL as the only interface (`bash()` with completion notices, `edit()`)
 - [ ] L2 subagents
 - [ ] L3 agent messaging
 - [ ] L4 continual harness and refine (prompts ported verbatim)

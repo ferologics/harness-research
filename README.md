@@ -16,8 +16,10 @@ Start with [VISION.md](VISION.md) and [docs/decisions.md](docs/decisions.md). Cu
 | [docs/infrastructure.md](docs/infrastructure.md) | Eval stack, task data, models, hardware |
 | [experiments/ladder/](experiments/ladder/PLAN.md) | Zero to hero: Pi to Prime Agent, one building block at a time |
 | [experiments/memory-sequences/](experiments/memory-sequences/PLAN.md) | Does the continual harness help on later tasks in the same repo? |
+| [duals/](duals/README.md) | Pi extensions mirroring Prime Agent's building blocks, with specs and tests |
+| [harnesses/](harnesses/) | verifiers plugins: `pi-ladder` (Pi with a rung's duals), `prime-switches` (Prime Agent with its settings) |
 | [scripts/](scripts/) | Data inspection scripts |
 
 ## Status
 
-Planning. No duals are built and no experiment has run.
+The L1 dual and both verifiers plugins are built and tested without a model. No experiment has run; the next step needs the GPU box.
