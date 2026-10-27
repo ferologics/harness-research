@@ -1,16 +1,17 @@
 # TODO
 
-## Now: checks that could still change the plan
+## Now
 
-- [ ] Prime Agent switches: does `rlmMaxDepth: 0` disable spawning; what does `harnessRefinements: false` turn off; how do settings reach the verifiers adapter?
-- [ ] `pi-acp` 0.0.34 with Pi 1.4.x: does it work? If not, fix it upstream or drive Pi in print mode.
-- [ ] SWE-rebench-V2 images: map Prime-registry tags to public `docker.io/swerebenchv2/...` images; pull a few to confirm.
+- [x] Prime Agent switches read from source (results in [docs/primitives.md](docs/primitives.md#matched-reference-points))
+- [x] `pi-acp` 0.0.34 drives Pi 1.4.0 end to end; verifiers upstream already pins both (`32c1f14`)
+- [x] SWE-rebench-V2 2025 tasks map 1:1 to public `swerebenchv2/` Docker Hub tags (40 of 40 sampled exist)
+- [ ] Smoke-run Prime Agent through the verifiers adapter: does refinement run with `--no-session`?
+- [ ] Harness subclasses in this repo: Pi with dual extensions per rung; Prime Agent with `settings.json` and `RLM_MAX_DEPTH`
 
 ## Setup
 
 - [ ] Linux box: Docker with the NVIDIA runtime; serve stock Qwen3.8-27B (pin engine build, quantization, chat template, sampling); test one OpenAI-compatible request with tool calls.
 - [ ] Install verifiers and prime-envs; run `swerebench_v2` on one task with the `bash` harness against the local model.
-- [ ] Upstream PR to verifiers: Pi adapter on Pi 1.4.x with an `extensions` option.
 - [ ] Ask Seth Karten the open questions in [docs/claims.md](docs/claims.md#open-questions-for-the-authors).
 
 ## Build the duals (in ladder order)
@@ -31,7 +32,7 @@ Each dual gets a spec (Prime source file and commit, deliberate differences) and
 - [ ] A2 screening: L0 and P on 90 candidates; select the subset
 - [ ] Freeze [experiments/ladder/PLAN.md](experiments/ladder/PLAN.md)
 - [ ] A3 main runs
-- [ ] B: GLM-5.2 smoke for cost, then L0, L5, P on 25 tasks
+- [ ] B (conditional): decide from A3 whether GLM-5.2 runs are worth it, and which
 
 ## Later
 

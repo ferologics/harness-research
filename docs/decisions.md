@@ -27,6 +27,7 @@ Agreed decisions with their reasons. Read this before proposing anything. A prop
 |---|---|
 | Breadth runs use stock Qwen3.8-27B served locally on the RTX 5090 (Linux). Measured runs never use uncensored or abliterated variants. | Free runs; stock weights keep results reproducible and comparable. |
 | Confirmation runs use GLM-5.2 (the paper's model) through Prime Inference, within the $150 credit. | Matches the paper; the credits exist. |
-| The eval stack is Prime Intellect's `verifiers` v1 with `prime-envs` tasksets on a Docker runtime. The verifiers Pi adapter (and `pi-acp` if needed) is updated upstream to current Pi; no long-lived fork. | Their infrastructure, uniform token accounting; the fix helps others. |
+| GLM-5.2 runs happen only if the local results show something worth confirming; what to run is decided after the local main runs. | Avoids spending on a question the local data may already answer. |
+| The eval stack is Prime Intellect's `verifiers` v1 with `prime-envs` tasksets on a Docker runtime. Loading the duals and setting Prime Agent's switches happen in small harness subclasses in this repo; no fork of verifiers. | Their infrastructure, uniform token accounting. Upstream already runs current Pi (`32c1f14`). |
 | Tasks come from existing public benchmarks, sliced for signal and cost. First: SWE-rebench-V2 (2025+, strata by files changed in the fix). Later: NL2RepoBench whole-repo builds. Memory track: same-repo SWE-rebench-V2 sequences. | Real coding, public, a size knob, cost-sensitive. |
 | Recursive Task Synthesis is not used for now. | Mostly short "easy" terminal tasks (2–10 minute expert estimates); no labelled round field to use as a horizon knob. |

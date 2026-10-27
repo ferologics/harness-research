@@ -60,4 +60,8 @@ Off by default or irrelevant in single-task evaluations: goal mode, autonomous m
 | L3 | `rlmMaxDepth: 2`, `harnessRefinements: false` |
 | L5 | defaults |
 
-To verify before use: that `rlmMaxDepth: 0` disables spawning, what exactly `harnessRefinements: false` turns off (its setting is described as controlling "refinement creation and context loading"), and how these settings reach the verifiers adapter.
+What the switches do (read from prime-agent source, `8aac869` / v0.10.1):
+
+- **`rlmMaxDepth: 0`** refuses every spawn: a spawn fails when the caller's depth is at least the limit (`pa-daemon/src/rlm_children/host.rs`). The limit resolves from the session's persisted value, then settings, then the `RLM_MAX_DEPTH` environment variable, then the default 2 (`rlm_host.rs`), so the adapter's `env` option can set it. The prompt still describes subagents; a model that tries gets the depth-limit error.
+- **`harnessRefinements: false`** is a master switch for scheduling, planning, and applying refinements, for automatic refine, and for delivering harness state to the model (`refinement_gate.rs`, `refine.rs`, `harness_digest.rs`, `wiring.rs`). It is read only from `settings.json` in the agent directory, so the adapter must write that file. The agent's own Python memory calls are not gated in the code read so far, but their contents no longer reach the model's context.
+- **Session persistence.** Refinement needs a local harness directory, which exists only for persisted sessions (`session/manager/queries.rs`). The verifiers adapter passes `--no-session` since `32c1f14`. If no other path supplies the directory, refinement is off in Prime Agent's default verifiers configuration. To verify with a smoke run before arm P is defined.

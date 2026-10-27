@@ -23,7 +23,7 @@ Rungs and duals are defined in [docs/primitives.md](../../docs/primitives.md).
 | L4 | Pi + duals | + continual harness and refine |
 | L5 | Pi + duals | + Prime's general guidance text |
 | T4 | Pi + duals as tools | Pi's tools + subagents, messaging, continual harness and refine as tools; no REPL |
-| P | Prime Agent v0.10.0 | defaults (depth 2, refinements on, autonomous off) |
+| P | Prime Agent v0.10.1 | defaults (depth 2, refinements on, autonomous off); refinement must actually be active (see primitives.md on `--no-session`) |
 | P-d0r0 | Prime Agent | `rlmMaxDepth: 0`, `harnessRefinements: false` (matches L1) |
 | P-d2r0 | Prime Agent | `rlmMaxDepth: 2`, `harnessRefinements: false` (matches L3) |
 | P-d0r1 | Prime Agent | `rlmMaxDepth: 0`, `harnessRefinements: true` (completes the 2×2) |
@@ -55,11 +55,11 @@ Tasks that every arm solves, or no arm solves, carry no information about differ
 | A1 smoke | Qwen3.8-27B (local) | 3 tasks × 11 arms | Debug every arm; measure time per run |
 | A2 screening | Qwen3.8-27B | 180 | Select the subset |
 | A3 main | Qwen3.8-27B | ~50 tasks × 11 arms × 2 runs ≈ 1,100 | All questions |
-| B confirmation | GLM-5.2 (Prime Inference) | 3 smoke, then L0, L5, P × 25 tasks × 1 run = 75 | Check the local findings on the paper's model; stop at $120 spent |
+| B confirmation (conditional) | GLM-5.2 (Prime Inference) | decided after A3; at most 75 runs, stop at $120 spent | Only if the local results show a difference worth confirming on the paper's model |
 | C | | | Memory track: [experiments/memory-sequences](../memory-sequences/PLAN.md) |
 | D | Qwen3.8-27B | tbd | NL2RepoBench whole-repo builds |
 
-A third run is added for a contrast only when its interval crosses the decision threshold (rule fixed at freeze). Phase B takes its 25 tasks from the 2–4 and 5+ file strata where local L0 failed.
+A third run is added for a contrast only when its interval crosses the decision threshold (rule fixed at freeze). If phase B runs, its arms and tasks are chosen from the A3 results and recorded here before any paid run.
 
 ## Metrics
 

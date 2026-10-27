@@ -5,7 +5,7 @@
 - **[verifiers](https://github.com/PrimeIntellect-ai/verifiers)** (MIT). The v1 API runs a taskset with a pluggable harness inside a container. All model calls pass through its interception proxy, which records the trace and counts tokens the same way for every harness. Runtime backends: `docker`, `prime`, `subprocess`, `custom`.
 - **[prime-envs](https://github.com/PrimeIntellect-ai/prime-envs)** tasksets, including `swe/swerebench_v2` and `code/nl2repobench`.
 
-Checked at verifiers `e7c8478` (Oct 26 2026) and prime-envs `ff6abb4` (Oct 22 2026).
+Checked at verifiers `32c1f14` (Oct 26 2026) and prime-envs `ff6abb4` (Oct 22 2026).
 
 ## Harness adapters
 
@@ -13,8 +13,12 @@ An adapter is verifiers' per-harness code: it installs the harness in the task c
 
 | Adapter | Pinned version | Notes |
 |---|---|---|
-| `pi` | Pi `0.86.1` through `pi-acp 0.0.33` | Runs in a fresh agent directory, so no personal settings load. Loads extensions only for its MCP adapter and tool gate. To do: bump to Pi 1.4.x and add an `extensions` option upstream; first check `pi-acp` (latest 0.0.34) against Pi 1.4.x. |
-| `prime_agent` | `v0.10.0`, commit `763094e` | Config: `autonomous` (default false), `dialect`. Prime Agent settings (`rlmMaxDepth`, `harnessRefinements`, `autoRefine`) live in its settings file; how to pass them through the adapter is unverified. |
+| `pi` | Pi `1.4.0` through `pi-acp 0.0.34`; MCP through Pi's built-in support | Upstream bumped in `32c1f14` (#2988). Runs in a fresh agent directory, so no personal settings load. Loads one extension of its own (the tool gate). |
+| `prime_agent` | `v0.10.1`, commit `8aac869` | Config: `autonomous` (default false), `dialect`, `env`. Passes `--no-session`, which may disable refinement (see [primitives.md](primitives.md#matched-reference-points)). |
+
+Our arms need two things the adapters don't offer: loading the dual extensions into Pi, and writing Prime Agent's `settings.json`. Both go into small harness subclasses in this repo, loaded through verifiers' plugin loader, so no upstream change is needed.
+
+`pi-acp 0.0.34` drives Pi 1.4.0 end to end: initialize, new session, a prompt with one bash tool call and its result, final answer (tested on macOS against a fake OpenAI-compatible server, outside verifiers).
 
 ## Task data
 
@@ -25,7 +29,7 @@ Prime Intellect's filtered and verified set, `PrimeIntellect/SWE-rebench-V2-Filt
 - 6,272 tasks across 1,890 repos, created 2014–2025.
 - 2025 or later: 544 tasks across 332 repos. Files changed in the reference fix: 1 file 178, 2–4 files 242, 5+ files 124.
 - Repos with at least 10 tasks: 106 repos, 1,954 tasks.
-- Every image reference points to Prime's registry (`prime/primeintellect/<repo>:<tag>`), which Docker cannot pull. Nebius' original dataset uses public `docker.io/swerebenchv2/<repo>:<tag>` images with the same tag pattern; the per-task mapping is unverified.
+- Every image reference points to Prime's registry (`prime/primeintellect/<repo>:<tag>`), which Docker cannot pull. All 544 tasks from 2025 match Nebius' `nebius/SWE-rebench-V2` by `instance_id` with the same `<repo>:<tag>`, and 40 of 40 sampled tags exist on Docker Hub under `swerebenchv2/`. Whether the image contents are identical is not checked.
 
 ### NL2RepoBench (later stratum)
 
